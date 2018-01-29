@@ -25,7 +25,7 @@
 int time = 900;
 int fullPower = 127;
 
-void drive(int increment, bool Forward)
+void Drive(int increment, bool Forward)
 {
 	if (Forward == true)
 	{
@@ -46,8 +46,8 @@ task main()
 {
 	for (int i = 1; i < 5; i++)
 	{
-	drive(i,true);
-	drive(i,false);
+		Drive(i,true);
+		Drive(i,false);
   }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
