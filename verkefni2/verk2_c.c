@@ -27,11 +27,11 @@
 |*    Digital - Port 7  leftEncoder         VEX Shaft Encoder     Left side                         *|
 \*----------------------------------------------------------------------------------------------------*/
 
-//611° == 0.55M
-//160° == 90°
+//1° == 0.045M
+//278.5 ° == 0.5M
 //int rotationConstant = 1.66;
 
-int driveInstructions[7] = {300, 0, 300, 0, 300, 0, 300};
+int driveInstructions[7] = {278.5, 0, 278.5, 0, 278.5, 0, 278.5};
 int rotateInstructions[7] = {0, -90, 0, 90, 0, 90, 0};
 
 
@@ -47,16 +47,16 @@ void Rotate(int degrees)
 	{
 		while(SensorValue[rightEncoder] < degrees * rotationConstant)
 		{
-			motor[rightMotor] = -70;
-			motor[leftMotor] = 70;
+			motor[rightMotor] = -90;
+			motor[leftMotor] = 90;
 		}
 	}
 	else
 	{
 		while(SensorValue[rightEncoder] < -degrees * rotationConstant)
 		{
-			motor[rightMotor] = 80;
-			motor[leftMotor] = -80;
+			motor[rightMotor] = 60;
+			motor[leftMotor] = -60;
 		}
 	}
 }
@@ -68,35 +68,9 @@ void Drive(int dist, bool backforw)
 
 	while(dist > SensorValue[rightEncoder])
 	{
-		int i = 0;
 
-		if (backforw == true)
-		{
-			i = 1;
-		}
-		else
-		{
-			i = -1;
-		}
-
-		if(SensorValue[rightEncoder] == SensorValue[leftEncoder]) // If rightEncoder has counted the same amount as leftEncoder:
-		{
-			// Move Forward
 			motor[rightMotor] = 80 * i;		    // Right Motor is run at power level 80
 			motor[leftMotor]  = 80 * i;		    // Left Motor is run at power level 80
-		}
-		else if(SensorValue[rightEncoder] > SensorValue[leftEncoder])	// If rightEncoder has counted more encoder counts
-		{
-			// Turn slightly right
-			motor[rightMotor] = 60 * i;		    // Right Motor is run at power level 60
-			motor[leftMotor]  = 80 * i; 	    // Left Motor is run at power level 80
-		}
-		else	// Only runs if leftEncoder has counted more encoder counts
-		{
-			// Turn slightly left
-			motor[rightMotor] = 80 * i;		    // Right Motor is run at power level 80
-			motor[leftMotor]  = 60 * i;		    // Left Motor is run at power level 60
-		}
 	}
 }
 
