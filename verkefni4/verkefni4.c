@@ -109,11 +109,11 @@ void ProximityAlert()
     rightEncode = SensorValue(rightEncoder);
     lightval = SensorValue(lightSensor);
 
-		if (SensorValue(sonar1) > 50)
+		if (SensorValue(sonar1) > 38)
 		{
 			Drive(1);
 		}
-		else if(SensorValue(sonar1) < 50)
+		else if(SensorValue(sonar1) < 38)
 		{
 		  Drive(3);
 		}
@@ -124,7 +124,7 @@ task main()
 {
 		while(emergencyButton == false) // While the ambient lightSensor reads a value greater than 200
 		{
-			if(SensorValue(lightSensor) < 300)
+			if(SensorValue(lightSensor) < 500)
 			{
 		     ProximityAlert();
 		     EmergencyButtons();
