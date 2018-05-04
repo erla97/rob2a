@@ -3,6 +3,7 @@ int Turns = 0;
 int TurnDegrees = 643;
 bool DirectionR = false;
 
+//Emergency button func
 bool EmergencyButtons()
 {
 	if(vexRT[Btn8U] == 1)
@@ -19,6 +20,7 @@ bool EmergencyButtons()
 	}
 }
 
+//Simple motor stop func
 void Stop()
 {
 	motor[rightMotor] = 0;
@@ -27,7 +29,7 @@ void Stop()
 
 void Drive()
 {
-
+  //Anti Directional support
 	if(SensorValue[rightEncoder] == SensorValue[leftEncoder]) // If rightEncoder has counted the same amount as leftEncoder:
 	{
 		// Move Forward
@@ -50,7 +52,7 @@ void Drive()
 
 void Turn()
 {
-		//Avoid being Stuck
+	//Avoid being Stuck
 	if(Laps > Turns && DirectionR == false)
 	{
 		DirectionR = true;
@@ -63,6 +65,7 @@ void Turn()
 	}
 	Laps += 1;
 
+	//Zeroes turn values and does a spin based on which direction it shall go
 	SensorValue[rightEncoder] = 0;
 	SensorValue[leftEncoder] = 0;
 	if(DirectionR == false)
@@ -91,7 +94,4 @@ void Turn()
 	{
 		DirectionR = false;
 	}
-
-
-
 }
