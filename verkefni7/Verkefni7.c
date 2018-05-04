@@ -16,13 +16,19 @@
 
 #include <functions_V7.c>
 
-/*-----------------------------------------------------------------------------------------------------*\
-|*                                         	 - Verkefni 7 -                                          	 *|
-|*                                      ROBOTC on VEX 2.0 CORTEX                                       *|
-|*                                                                                                     *|
-|*  The vex only starts once one of the linefollowers detect a value above 2800. vex then follows      *|
-|* that value and if it goes of course it will automaticly rotate towards the angle that lost the line *|
-\*-----------------------------------------------------------------------------------------------------*/
+int lightSensorSens = 400
+int SonarDist = 42
+
+/*-----------------------------------------------------------------------------------------------------------------*\
+|*                                         		 	  - Verkefni 7 -                                          	 			 *|
+|*                                      		 ROBOTC on VEX 2.0 CORTEX                                       		   *|
+|*                                                                                                     						 *|
+|*                                      			- Cleaning the Table -                                               *|
+|*                                                                                                     						 *|
+|*                                                                                                     						 *|
+|*  The Vex will use his brush to clean Eirikurs floors. A simple ai will rotate based on how close the sensor is. *|
+|* A simple ai will rotate based on how close the sensor is. when the laps have finished he will change directions.*|
+\*-----------------------------------------------------------------------------------------------------------------*/
 
 
 
@@ -31,12 +37,13 @@ task main()
 {
 	while(EmergencyButtons() == false)
   {
-  	if (SensorValue[lightSensor] < 400)
+  	if (SensorValue[lightSensor] < lightSensorSens)
     {
+
     	SensorValue[rightEncoder] = 0;
 			SensorValue[leftEncoder] = 0;
 
-    	if (SensorValue[sonar1] > 38)
+    	if (SensorValue[sonar1] > 42)
     	{
     		Drive();
     	}
